@@ -37,12 +37,10 @@ def main():
             chain=f'{config.CURRENCY}-{config.CHAIN}'
         )
 
-        status = 'SUCCESS' if response['code'] == '0' else 'ERROR'
-
         print(f'\n'.join([
             f'>>>\tAddress: {wallet}',
             f'\tAmount: {amount:.2f}',
-            f'\tStatus: {status}'
+            f'\tStatus: {"SUCCESS" if response["code"] == "0" else "ERROR"}'
         ]))
 
         if response['code'] != '0':
