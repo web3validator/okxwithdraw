@@ -1,1 +1,3 @@
-0xa2eD8C5BbA35e242f015988D21807B15a0072Afb
+wallet1
+wallet2
+wallet3

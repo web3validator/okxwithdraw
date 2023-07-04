@@ -2,10 +2,15 @@ import os
 import random
 import time
 
+# noinspection PyPackageRequirements
 from okx.Funding import FundingAPI
 from dotenv import load_dotenv
 
 import config
+
+
+def rand_decimal(mn, mx):
+    return random.randint(mn * 100, mx * 100) / 100
 
 
 def main():
@@ -21,7 +26,7 @@ def main():
     for wallet in wallets:
         print()
 
-        amount = random.randint(config.AMOUNT_MIN * 100, config.AMOUNT_MAX * 100) / 100
+        amount = rand_decimal(config.AMOUNT_MIN, config.AMOUNT_MAX)
 
         response = funding_api.withdrawal(
             ccy=str(config.CURRENCY),
@@ -47,7 +52,7 @@ def main():
         else:
             print(f'\tID: {response["data"][0]["wdId"]}')
 
-        time.sleep(1 / config.RATE_LIMIT)
+        time.sleep(rand_decimal(config.DELAY_MIN, config.DELAY_MAX))
 
     print('\nDone')
     errors = 'None' if errors == 0 else errors
