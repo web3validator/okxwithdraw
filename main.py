@@ -24,8 +24,6 @@ def main():
 
     errors = 0
     for wallet in wallets:
-        print()
-
         amount = rand_decimal(config.AMOUNT)
 
         response = funding_api.withdrawal(
@@ -38,6 +36,7 @@ def main():
         )
 
         print(f'\n'.join([
+            '',
             f'>>>\tAddress: {wallet}',
             f'\tAmount: {amount:.2f}',
             f'\tStatus: {"SUCCESS" if response["code"] == "0" else "ERROR"}'
