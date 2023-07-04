@@ -33,7 +33,7 @@ def main():
             amt=str(amount),
             dest='4',
             toAddr=wallet,
-            fee=config.FEE,
+            fee=str(config.FEE),
             chain=f'{config.CURRENCY}-{config.CHAIN}'
         )
 
