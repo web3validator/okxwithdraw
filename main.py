@@ -17,7 +17,7 @@ def main():
     funding_api = FundingAPI(API_KEY, SECRET_KEY, PASSPHRASE, flag='0', debug=False)
 
     with open('wallets.txt', 'r') as f:
-        wallets = [wallet.strip() for wallet in f.readlines()]
+        wallets = [wallet.strip() for wallet in f.readlines() if wallet.strip() != '']
         random.shuffle(wallets)
 
     print('Requesting withdrawals...')
