@@ -55,8 +55,8 @@ def main():
         time.sleep(rand_decimal(config.DELAY_MIN, config.DELAY_MAX))
 
     print('\nDone')
-    errors = 'None' if errors == 0 else errors
-    print(f'Errors: {errors}')
+    if errors != 0:
+        print(f'Errors: {errors}')
 
 
 if __name__ == '__main__':
