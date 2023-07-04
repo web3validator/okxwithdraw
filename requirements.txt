@@ -1,2 +1,2 @@
-python-okx~=0.2
-python-dotenv~=1
+python-okx==0.2
+python-dotenv==1
