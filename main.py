@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 import config
 
 
-def rand_decimal(mn, mx):
-    return random.randint(mn * 100, mx * 100) / 100
+def rand_decimal(rng):
+    return random.randint(rng[0] * 100, rng[1] * 100) / 100
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
     for wallet in wallets:
         print()
 
-        amount = rand_decimal(config.AMOUNT_MIN, config.AMOUNT_MAX)
+        amount = rand_decimal(config.AMOUNT)
 
         response = funding_api.withdrawal(
             ccy=str(config.CURRENCY),
@@ -50,7 +50,7 @@ def main():
         else:
             print(f'\tID: {response["data"][0]["wdId"]}')
 
-        time.sleep(rand_decimal(config.DELAY_MIN, config.DELAY_MAX))
+        time.sleep(rand_decimal(config.DELAY))
 
     print('\nDone')
     if errors != 0:
