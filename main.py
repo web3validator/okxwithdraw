@@ -9,10 +9,6 @@ from dotenv import load_dotenv
 import config
 
 
-def rand_decimal(rng):
-    return random.randint(rng[0] * 100, rng[1] * 100) / 100
-
-
 def main():
     funding_api = FundingAPI(API_KEY, SECRET_KEY, PASSPHRASE, flag='0', debug=False)
 
@@ -24,7 +20,7 @@ def main():
 
     errors = 0
     for wallet in wallets:
-        amount = rand_decimal(config.AMOUNT)
+        amount = round(random.uniform(*config.AMOUNT), config.PRECISION)
 
         response = funding_api.withdrawal(
             ccy=str(config.CURRENCY),
@@ -38,7 +34,7 @@ def main():
         print(f'\n'.join([
             '',
             f'>>>\tAddress: {wallet}',
-            f'\tAmount: {amount:.2f}',
+            f'\tAmount: {amount}',
             f'\tStatus: {"SUCCESS" if response["code"] == "0" else "ERROR"}'
         ]))
 
@@ -49,7 +45,8 @@ def main():
         else:
             print(f'\tID: {response["data"][0]["wdId"]}')
 
-        time.sleep(rand_decimal(config.DELAY))
+        if wallet != wallets[-1]:
+            time.sleep(random.uniform(*config.DELAY))
 
     print('\nDone')
     if errors != 0:
